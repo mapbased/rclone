@@ -20,18 +20,18 @@ import (
 
 // Root is the main rclone command
 var Root = &cobra.Command{
-	Use:   "rclone",
-	Short: "Show help for rclone commands, flags and backends.",
+	Use:   "ipfsdrive",
+	Short: "Show help for ipfsdrive commands, flags and backends.",
 	Long: `
-Rclone syncs files to and from cloud storage providers as well as
+ipfsdrive syncs files to and from cloud storage providers as well as
 mounting them, listing them in lots of different ways.
 
-See the home page (https://rclone.org/) for installation, usage,
+See the home page (https://www.ipfsdrive.com/) for installation, usage,
 documentation, changelog and configuration walkthroughs.
 
 `,
 	PersistentPostRun: func(cmd *cobra.Command, args []string) {
-		fs.Debugf("rclone", "Version %q finishing with parameters %q", fs.Version, os.Args)
+		fs.Debugf("ipfsdrive", "Version %q finishing with parameters %q", fs.Version, os.Args)
 		atexit.Run()
 	},
 	BashCompletionFunction: bashCompletionFunc,
@@ -107,7 +107,7 @@ var flagsRe *regexp.Regexp
 // Show the flags
 var helpFlags = &cobra.Command{
 	Use:   "flags [<regexp to match>]",
-	Short: "Show the global flags for rclone",
+	Short: "Show the global flags for ipfsdrive",
 	Run: func(command *cobra.Command, args []string) {
 		if len(args) > 0 {
 			re, err := regexp.Compile(args[0])
@@ -148,7 +148,7 @@ var helpBackend = &cobra.Command{
 	},
 }
 
-// runRoot implements the main rclone command with no subcommands
+// runRoot implements the main ipfsdrive command with no subcommands
 func runRoot(cmd *cobra.Command, args []string) {
 	if version {
 		ShowVersion()
@@ -184,9 +184,9 @@ func setupRootCommand(rootCmd *cobra.Command) {
 		return cmd.CalledAs() != "flags"
 	})
 	cobra.AddTemplateFunc("showLocalFlags", func(cmd *cobra.Command) bool {
-		// Don't show local flags (which are the global ones on the root) on "rclone" and
-		// "rclone help" (which shows the global help)
-		return cmd.CalledAs() != "rclone" && cmd.CalledAs() != ""
+		// Don't show local flags (which are the global ones on the root) on "ipfsdrive" and
+		// "ipfsdrive help" (which shows the global help)
+		return cmd.CalledAs() != "ipfsdrive" && cmd.CalledAs() != ""
 	})
 	cobra.AddTemplateFunc("backendFlags", func(cmd *cobra.Command, include bool) *pflag.FlagSet {
 		backendFlagSet := pflag.NewFlagSet("Backend Flags", pflag.ExitOnError)
@@ -239,19 +239,19 @@ Backend Flags:
 Additional help topics:{{range .Commands}}{{if .IsAdditionalHelpTopicCommand}}
   {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}
 
-Use "rclone [command] --help" for more information about a command.
-Use "rclone help flags" for to see the global flags.
-Use "rclone help backends" for a list of supported services.
+Use "ipfsdrive [command] --help" for more information about a command.
+Use "ipfsdrive help flags" for to see the global flags.
+Use "ipfsdrive help backends" for a list of supported services.
 `
 
 var docFlagsTemplate = `---
 title: "Global Flags"
-description: "Rclone Global Flags"
+description: "ipfsdrive Global Flags"
 ---
 
 # Global Flags
 
-This describes the global flags available to every rclone command
+This describes the global flags available to every ipfsdrive command
 split into two groups, non backend and backend flags.
 
 ## Non Backend Flags
@@ -274,12 +274,12 @@ and may be set in the config file.
 
 // show all the backends
 func showBackends() {
-	fmt.Printf("All rclone backends:\n\n")
+	fmt.Printf("All ipfsdrive backends:\n\n")
 	for _, backend := range fs.Registry {
 		fmt.Printf("  %-12s %s\n", backend.Prefix, backend.Description)
 	}
 	fmt.Printf("\nTo see more info about a particular backend use:\n")
-	fmt.Printf("  rclone help backend <name>\n")
+	fmt.Printf("  ipfsdrive help backend <name>\n")
 }
 
 func quoteString(v interface{}) string {
@@ -327,7 +327,7 @@ func showBackend(name string) {
 			fmt.Printf("#### --%s%s\n\n", opt.FlagName(backend.Prefix), shortOpt)
 			fmt.Printf("%s\n\n", opt.Help)
 			if opt.IsPassword {
-				fmt.Printf("**NB** Input to this must be obscured - see [rclone obscure](/commands/rclone_obscure/).\n\n")
+				fmt.Printf("**NB** Input to this must be obscured - see [ipfsdrive obscure](/commands/rclone_obscure/).\n\n")
 			}
 			fmt.Printf("- Config:      %s\n", opt.Name)
 			fmt.Printf("- Env Var:     %s\n", opt.EnvVarName(backend.Prefix))
