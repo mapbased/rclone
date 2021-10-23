@@ -54,16 +54,16 @@ func init() {
 
 NB If filename_encryption is "off" then this option will do nothing.`,
 			Default: true,
-			//Examples: []fs.OptionExample{
-			//	{
-			//		Value: "true",
-			//		Help:  "Encrypt directory names.",
-			//	},
-			//	{
-			//		Value: "false",
-			//		Help:  "Don't encrypt directory names, leave them intact.",
-			//	},
-			//},
+			Examples: []fs.OptionExample{
+				{
+					Value: "true",
+					Help:  "Encrypt directory names.",
+				},
+				{
+					Value: "false",
+					Help:  "Don't encrypt directory names, leave them intact.",
+				},
+			},
 		}, {
 			Name:       "password",
 			Help:       "Password or pass phrase for encryption.",

@@ -116,7 +116,7 @@ func (f *Fs) List(ctx context.Context, dir string) (entries fs.DirEntries, err e
 	for _, v := range items {
 		//fmt.Printf("", v)
 
-		t, e := time.Parse("YYYY-MM-DDTHH:MM:SSZ", v.Created)
+		t, e := time.Parse("YYYY-MM-DDTHH:mm:ssZ", v.Created)
 		if e != nil {
 			t = time.Now()
 		}

@@ -67,7 +67,7 @@ type Options struct {
 const MaxChunkSize = int64(262144)
 
 const LocalGateway = "http://localhost:5001"
-const PublicGateway = "https://ipfs.io"
+const PublicGateway = "https://dweb.link"
 
 type SharedRoots struct {
 	sync.RWMutex
