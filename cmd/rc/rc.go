@@ -47,7 +47,7 @@ func init() {
 
 var commandDefinition = &cobra.Command{
 	Use:   "rc commands parameter",
-	Short: `Run a command against a running rclone.`,
+	Short: `Run a command against a running ipfsdrive.`,
 	Long: `
 
 This runs a command against a running rclone.  Use the --url flag to

@@ -19,7 +19,7 @@ func init() {
 
 var commandDefinition = &cobra.Command{
 	Use:   "rcd <path to files to serve>*",
-	Short: `Run rclone listening to remote control commands only.`,
+	Short: `Run ipfsdrive listening to remote control commands only.`,
 	Long: `
 This runs rclone so that it only listens to remote control commands.
 
